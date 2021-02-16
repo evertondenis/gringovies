@@ -11,3 +11,26 @@ code {
   font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
     monospace;
 }
+
+.hide-scrollbar{
+  overflow-y: scroll;
+  overflow-x: hidden;
+}
+
+.hide-scrollbar::-webkit-scrollbar{
+  background-color: white;
+  border-radius: 10px;
+  width: 20px;
+}
+
+.hide-scrollbar::-webkit-scrollbar-thumb{
+  background-color: #eee;
+  border-radius: 10px;
+  border: 5px solid white;
+}
+
+.hide-scrollbar::-webkit-scrollbar-thumb:vertical{
+  height: 20px!important;
+  width: 20px;
+
+}
