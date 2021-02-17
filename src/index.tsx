@@ -1,24 +1,16 @@
 import React from 'react'
 import ReactDOM from 'react-dom'
-import { BrowserRouter, Link } from 'react-router-dom'
+import { BrowserRouter } from 'react-router-dom'
 import { Routes } from 'core/routes'
-import './index.css'
+
+import { GlobalStyle } from 'core/assets/styles/global'
 
 import reportWebVitals from './reportWebVitals'
 
 ReactDOM.render(
   <React.StrictMode>
     <BrowserRouter>
-      <nav>
-        <ul>
-          <li>
-            <Link to="/">Home</Link>
-          </li>
-          <li>
-            <Link to="/favorites">My favorites</Link>
-          </li>
-        </ul>
-      </nav>
+      <GlobalStyle />
       <Routes />
     </BrowserRouter>
   </React.StrictMode>,

@@ -83,7 +83,6 @@ function MovieList() {
 
   return (
     <>
-      <h1>Bem Vindo!</h1>
       <div
         style={{
           display: 'flex',

@@ -1,2 +1,3 @@
 import Search from './Search'
-export { Search }
+import Input from './Input'
+export { Input, Search }
