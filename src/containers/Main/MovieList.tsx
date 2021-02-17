@@ -2,15 +2,13 @@ import { Link } from 'react-router-dom'
 import { format } from 'date-fns'
 import { useSWRInfinite } from 'swr'
 
+import { fetcher } from 'core/hooks/useFetch'
 import { useLocalStorage } from 'core/hooks/useLocalStorage'
-
-const path = 'https://api.themoviedb.org/3/'
+import { PopularMovies } from 'core/providers/popular-movies'
 
 const sanitizeDate = (value: string) => {
   return value.replaceAll('-', '/')
 }
-
-const fetcher = (url: string) => fetch(url).then((res) => res.json())
 
 function MovieList() {
   const [storedValue, setValue] = useLocalStorage('movies', [
@@ -18,17 +16,12 @@ function MovieList() {
   ])
 
   const { data, error, mutate, size, setSize, isValidating } = useSWRInfinite(
-    (index) =>
-      `${path}discover/movie?sort_by=popularity.desc&api_key=f6a4eba9f0abf6b6cc13764bee3a6052&page=${
-        index + 1
-      }`,
+    (index) => PopularMovies(index + 1),
     fetcher
   )
   const listOfMovies = data ? [].concat(...data) : []
 
   const setFavorite = (movie: any) => {
-    console.log(storedValue)
-
     const isFavorite = !!storedValue.find((item) => item.id === movie.id)
 
     if (!isFavorite) {
@@ -41,10 +34,6 @@ function MovieList() {
   }
 
   const deleteFavorite = (movie: any) => {
-    console.log(storedValue)
-
-    console.log(storedValue.filter((item) => item.id !== movie.id))
-
     const newList = storedValue.filter((item) => item.id !== movie.id)
     setValue(newList)
   }
@@ -68,7 +57,7 @@ function MovieList() {
 
   // LIST MOVIES
   const movieList = ({ results }: any) => {
-    return results.map((item: any) => {
+    return results?.map((item: any) => {
       return (
         <div key={item.id} style={{ width: '200px', marginBottom: '20px' }}>
           <Link
@@ -104,8 +93,8 @@ function MovieList() {
         }}
       >
         {listOfMovies && listOfMovies.map((movies) => movieList(movies))}
-        <button onClick={() => setSize(size + 1)}>LOAD MORE</button>
       </div>
+      <button onClick={() => setSize(size + 1)}>LOAD MORE</button>
     </>
   )
 }

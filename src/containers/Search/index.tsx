@@ -2,11 +2,14 @@ import { withRouter } from 'react-router-dom'
 import { useFetch } from 'core/hooks/useFetch'
 import { Link } from 'react-router-dom'
 
+import { SearchMovies } from 'core/providers/popular-movies'
+import { fetcher } from 'core/hooks/useFetch'
+
 const SearchResult = ({ match }: any) => {
   const path = 'https://api.themoviedb.org/3/'
 
   const { data, isLoading, isError } = useFetch(
-    `${path}search/multi?query=${match.params.query}&api_key=f6a4eba9f0abf6b6cc13764bee3a6052`
+    SearchMovies(match.params.query)
   )
 
   // if (isLoading) console.log('LOADING')

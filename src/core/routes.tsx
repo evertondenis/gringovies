@@ -1,6 +1,6 @@
 import { Switch, Route } from 'react-router-dom'
 
-import Home from 'containers/Home'
+import Home from 'containers/Main'
 import Movie from 'containers/Movie'
 import FavoritesMovies from 'containers/Favorites'
 import SearchPage from 'containers/Search'

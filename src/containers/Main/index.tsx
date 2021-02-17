@@ -3,7 +3,7 @@ import { useHistory } from 'react-router-dom'
 
 import MovieList from './MovieList'
 
-const Home = () => {
+const Main = () => {
   const inputSearch = useRef<HTMLInputElement>(null)
   const history = useHistory()
 
@@ -28,4 +28,4 @@ const Home = () => {
   )
 }
 
-export default Home
+export default Main

@@ -1,16 +1,16 @@
 import { useEffect, useState } from 'react'
 import { useFetch } from 'core/hooks/useFetch'
-import Trailer from './MovieTrailer'
 
+import { getMovie } from 'core/providers/popular-movies'
+
+import Trailer from './MovieTrailer'
 import Details from './MovieDetails'
 
 const path = 'https://api.themoviedb.org/3/'
 
 const Movie = ({ match }: any) => {
   const [movie, setMovie] = useState()
-  const { data, isLoading, isError } = useFetch(
-    `${path}movie/${match.params.id}?api_key=f6a4eba9f0abf6b6cc13764bee3a6052`
-  )
+  const { data, isLoading, isError } = useFetch(getMovie(match.params.id))
 
   // if (isLoading) console.log('LOADING')
   // if (isError) console.log('ERROR')
