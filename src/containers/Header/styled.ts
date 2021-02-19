@@ -2,12 +2,15 @@ import styled from 'styled-components'
 import { Link } from 'react-router-dom'
 import { Input } from 'components'
 
-export const HeaderNav = styled.header`
+export const StyledHeader = styled.header`
   align-items: center;
-  background-color: #000;
+  background-color: rgba(0, 0, 0, 1);
   display: flex;
-  height: 60px;
-  margin-bottom: 20px;
+  height: 80px;
+  position: fixed;
+  top: 0;
+  width: 100%;
+  z-index: 2;
 `
 
 export const Wrapper = styled.div`
@@ -22,10 +25,20 @@ export const LinkItem = styled(Link)`
   color: rgb(250, 250, 250);
   text-decoration: none;
 
+  &:last-child {
+    padding-left: 10px;
+  }
+
   &.column {
+    align-items: center;
     color: #ff424f;
     display: flex;
-    flex-direction: column;
+    flex-direction: row;
+
+    p {
+      font-size: 12px;
+      color: #fff;
+    }
   }
 `
 

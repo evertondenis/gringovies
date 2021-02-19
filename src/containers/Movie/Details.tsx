@@ -1,7 +1,12 @@
 import { useEffect, useState } from 'react'
+import { format } from 'date-fns'
 
 import { usePalette } from 'react-palette'
-import Casting from './MovieCast'
+import Casting from './Cast'
+
+const sanitizeDate = (value: string) => {
+  return value.replaceAll('-', '/')
+}
 
 interface Movie {
   id: number
@@ -11,10 +16,25 @@ interface Movie {
   overview: string
   status: string
   genres: null
+  release_date: string
+  release_dates: CertificationProps
+  vote_average: number
+}
+
+interface Certification {
+  certification: string
+  note: string
+  release_date: string
+  type: number
+}
+interface ReleaseDates {
+  release_dates: Array<Certification>
+}
+interface CertificationProps {
+  results: Array<ReleaseDates>
 }
 
 const MovieDetails = ({ movieInfo, img }: any) => {
-  console.log(img)
   const [movie, setMovie] = useState<Movie>()
   const { data, loading, error } = usePalette(img)
 
@@ -26,6 +46,16 @@ const MovieDetails = ({ movieInfo, img }: any) => {
     if (genres) {
       const list = genres.map((item: any) => item.name)
       return list.toString()
+    }
+  }
+
+  const getCertification = ({ results }: CertificationProps) => {
+    console.log('RESULTS: ', Object.keys(results[0])[0])
+    const iso = Object.keys(results[0])[0]
+    if (results) {
+      const value = results.find((item: any) => item[iso] === 'US')
+
+      return value?.release_dates[0].certification.toString()
     }
   }
 
@@ -93,7 +123,15 @@ const MovieDetails = ({ movieInfo, img }: any) => {
                   <div>
                     <p>{movie.title}</p>
                   </div>
+                  {getCertification(movie.release_dates)}
                   <div>
+                    <p>
+                      {format(
+                        new Date(sanitizeDate(movie.release_date)),
+                        'MM/dd/yyyy'
+                      )}
+                    </p>
+                    <p>{movie.vote_average * 10}%</p>
                     <p>{getGenres(movie.genres)}</p>
                   </div>
                   <div>

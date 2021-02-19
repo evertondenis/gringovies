@@ -6,9 +6,9 @@ interface FavoriteList {
   image: string
 }
 
-const FavoriteMovies = () => {
+const Watchlist = () => {
   const [storedValue, setValue] = useLocalStorage<Array<FavoriteList>>(
-    'favorites',
+    'watchlist',
     []
   )
 
@@ -29,7 +29,7 @@ const FavoriteMovies = () => {
 
   return (
     <section style={{ margin: '100px 4% 20px' }}>
-      <h1>Meu Favoritos</h1>
+      <h1>Watchlist</h1>
       <div
         style={{
           display: 'flex',
@@ -44,4 +44,4 @@ const FavoriteMovies = () => {
   )
 }
 
-export default FavoriteMovies
+export default Watchlist

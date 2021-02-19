@@ -52,7 +52,7 @@ const MovieCast = ({ movieId }: any) => {
 
   return (
     <section style={{ width: '100%', display: 'block', padding: '30px 0' }}>
-      <h2>Casting</h2>
+      <h2>Cast</h2>
       {movie && data && (
         <div
           style={{

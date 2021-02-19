@@ -1,10 +1,10 @@
 import { useEffect, useState } from 'react'
 import { useFetch } from 'core/hooks/useFetch'
 
-import { getMovie } from 'core/providers/popular-movies'
+import { getMovie } from 'core/providers'
 
-import Trailer from './MovieTrailer'
-import Details from './MovieDetails'
+import Trailer from './Trailer'
+import Details from './Details'
 
 const path = 'https://api.themoviedb.org/3/'
 
@@ -16,13 +16,14 @@ const Movie = ({ match }: any) => {
   // if (isError) console.log('ERROR')
   // if (data) console.log('-- ', data)
 
+  console.log('movie: ', movie)
+
   useEffect(() => {
     setMovie(data)
   }, [data])
 
   return (
-    <div>
-      <h1>MOVIE PAGE!!!</h1>
+    <section style={{ margin: '80px 0 20px' }}>
       {movie && !isLoading && (
         <Details
           movieInfo={movie}
@@ -30,7 +31,7 @@ const Movie = ({ match }: any) => {
         />
       )}
       <Trailer id={match.params.id} />
-    </div>
+    </section>
   )
 }
 export default Movie

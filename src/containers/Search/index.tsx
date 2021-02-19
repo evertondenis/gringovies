@@ -2,7 +2,7 @@ import { withRouter } from 'react-router-dom'
 import { useFetch } from 'core/hooks/useFetch'
 import { Link } from 'react-router-dom'
 
-import { SearchMovies } from 'core/providers/popular-movies'
+import { SearchMovies } from 'core/providers'
 import { fetcher } from 'core/hooks/useFetch'
 
 const SearchResult = ({ match }: any) => {

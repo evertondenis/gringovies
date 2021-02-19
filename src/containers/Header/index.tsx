@@ -2,7 +2,7 @@ import { useRef } from 'react'
 import { useHistory } from 'react-router-dom'
 
 import {
-  HeaderNav,
+  StyledHeader,
   Wrapper,
   WrapperSearch,
   LinkItem,
@@ -11,6 +11,7 @@ import {
 
 import { Search } from '@styled-icons/evil'
 import { BookmarkHeart } from '@styled-icons/boxicons-solid/BookmarkHeart'
+import { Bookmark } from '@styled-icons/boxicons-solid/Bookmark'
 
 const Header = () => {
   const inputSearch = useRef<HTMLInputElement>(null)
@@ -23,7 +24,7 @@ const Header = () => {
   }
 
   return (
-    <HeaderNav>
+    <StyledHeader>
       <Wrapper>
         <LinkItem to="/">GringoVies</LinkItem>
         <WrapperSearch>
@@ -33,13 +34,18 @@ const Header = () => {
             onKeyDown={handleKeyDown}
             placeholder="Search movies"
           />
-          <Search size="28" />
+          <Search size="28" title="Search movies" />
         </WrapperSearch>
         <LinkItem to="/favorites" className="column">
-          <BookmarkHeart size="29" />
+          <BookmarkHeart size="24" title="Favorites" />
+          <p>Favorites</p>
+        </LinkItem>
+        <LinkItem to="/watchlist" className="column">
+          <Bookmark size="24" title="Watchist" />
+          <p>Watchlist</p>
         </LinkItem>
       </Wrapper>
-    </HeaderNav>
+    </StyledHeader>
   )
 }
 
