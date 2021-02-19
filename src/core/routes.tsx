@@ -13,11 +13,11 @@ export const Routes = () => {
     <>
       <Header />
       <Switch>
-        <Route path="/" exact component={Home} />
+        <Route path="/:page?/:query?" exact component={Home} />
         <Route path="/movie/:id" exact component={Movie} />
         <Route path="/favorites" exact component={FavoritesMovies} />
         <Route path="/watchlist" exact component={Watchlist} />
-        <Route path="/search/:query" exact component={SearchPage} />
+        {/* <Route path="/search/:query" exact component={SearchPage} /> */}
         <Route path="*" exact component={Home} />
       </Switch>
     </>

@@ -27,7 +27,7 @@ interface IList {
 
 const SearchResult = ({ match }: any) => {
   const { data, size, setSize } = useSWRInfinite(
-    (index) => SearchMovies(match.params.query, index + 1),
+    (index) => SearchMovies(index + 1, match.params.query),
     fetcher
   )
   console.log('DATA: ', data)

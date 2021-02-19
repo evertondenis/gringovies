@@ -1,7 +1,8 @@
+import { withRouter } from 'react-router-dom'
 import { useSWRInfinite } from 'swr'
 import { fetcher } from 'core/hooks/useFetch'
 import { useLocalStorage } from 'core/hooks/useLocalStorage'
-import { PopularMovies } from 'core/providers'
+import { PopularMovies, SearchMovies } from 'core/providers'
 
 import MovieItem from './Item'
 interface FavoriteList {
@@ -28,7 +29,8 @@ interface IList {
   results: Array<IMovie>
 }
 
-const MovieList = () => {
+const MovieList = ({ match }: any) => {
+  console.log('PARAMS: ', match.params)
   const [storedFavorite, setFavorite] = useLocalStorage<Array<FavoriteList>>(
     'favorites',
     []
@@ -39,10 +41,21 @@ const MovieList = () => {
     []
   )
 
+  // SearchMovies(match.params.query, index + 1)
+
+  const root: any = {
+    search: SearchMovies,
+    undefined: PopularMovies
+  }
+
   const { data, size, setSize } = useSWRInfinite(
-    (index) => PopularMovies(index + 1),
+    (index) => root[match.params.page](index + 1, match.params.query),
     fetcher
   )
+  // const { data, size, setSize } = useSWRInfinite(
+  //   (index) => PopularMovies(index + 1),
+  //   fetcher
+  // )
   const listOfMovies = data ? [].concat(...data) : []
 
   const movieList = ({ results }: IList) => {
@@ -96,4 +109,4 @@ const MovieList = () => {
   )
 }
 
-export default MovieList
+export default withRouter(MovieList)
