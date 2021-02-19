@@ -1,5 +1,4 @@
 import { useSWRInfinite } from 'swr'
-
 import { fetcher } from 'core/hooks/useFetch'
 import { useLocalStorage } from 'core/hooks/useLocalStorage'
 import { PopularMovies } from 'core/providers'
@@ -9,7 +8,6 @@ interface FavoriteList {
   id: number
   image: string
 }
-
 interface IMovie {
   adult: boolean
   backdrop_path: string
@@ -46,8 +44,6 @@ const MovieList = () => {
     fetcher
   )
   const listOfMovies = data ? [].concat(...data) : []
-
-  console.log(listOfMovies)
 
   const movieList = ({ results }: IList) => {
     return results?.map((item: IMovie) => (

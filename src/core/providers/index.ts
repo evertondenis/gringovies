@@ -3,8 +3,8 @@ const { REACT_APP_API_ENDPOINT } = process.env
 export const PopularMovies = (params: number) => {
   return `${REACT_APP_API_ENDPOINT}discover/movie?sort_by=popularity.desc&page=${params}`
 }
-export const SearchMovies = (query: string) => {
-  return `${REACT_APP_API_ENDPOINT}search/multi?query=${query}`
+export const SearchMovies = (query: string, params: number) => {
+  return `${REACT_APP_API_ENDPOINT}search/movie?query=${query}&page=${params}`
 }
 
 export const getMovie = (id: number) => {
