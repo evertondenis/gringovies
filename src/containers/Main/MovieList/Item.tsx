@@ -1,43 +1,52 @@
 import Card from '../components/Card'
 import Actions from './actions'
 
-interface MovieItemProps {
+interface IMovie {
+  adult: boolean
+  backdrop_path: string
+  genre_ids: []
+  id: number
+  original_language: string
+  original_title: string
+  overview: string
+  popularity: number
+  poster_path: string
+  title: string
+  video: boolean
+  vote_average: number
+  vote_count: number
+  release_date: string
+}
+
+interface MovieItemProps extends IMovie {
   id: number
   title: string
   vote_average: number
   release_date: string
   poster_path: string
-  favList: Array<FavoriteList>
-  watchList: Array<FavoriteList>
-  updateFav: (arg: Array<FavoriteList>) => void
-  updateWatch: (arg: Array<FavoriteList>) => void
-}
-
-interface FavoriteList {
-  id: number
-  image: string
+  favList: Array<IMovie>
+  watchList: Array<IMovie>
+  updateFav: (arg: IMovie[]) => void
+  updateWatch: (arg: IMovie[]) => void
 }
 
 const MovieItem = ({
-  id,
-  title,
-  vote_average,
-  poster_path,
   favList,
   watchList,
   updateFav,
-  updateWatch
+  updateWatch,
+  ...rest
 }: MovieItemProps) => {
   return (
     <Card
-      key={id}
-      img={`https://image.tmdb.org/t/p/w500/${poster_path}`}
-      link={`/movie/${id}`}
-      title={title}
-      average={`${vote_average * 10}%`}
+      key={rest.id}
+      img={`https://image.tmdb.org/t/p/w500/${rest.poster_path}`}
+      link={`/movie/${rest.id}`}
+      title={rest.title}
+      average={`${rest.vote_average * 10}%`}
     >
       <Actions
-        list={{ id: id, image: poster_path }}
+        list={rest}
         favList={favList}
         watchList={watchList}
         updateFav={updateFav}

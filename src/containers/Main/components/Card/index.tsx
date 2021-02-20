@@ -1,6 +1,8 @@
 import React, { FC } from 'react'
 import { Link } from 'react-router-dom'
 
+import { LazyImage } from 'components'
+
 import {
   Average,
   ContainerImage,
@@ -21,7 +23,7 @@ const Card: FC<Props> = ({ children, img, title, link, average }) => (
   <StyledCard>
     <ContainerImage>
       <Link to={link}>
-        <img src={img} alt={title} />
+        <LazyImage src={img} alt={title} />
       </Link>
     </ContainerImage>
     <Descriptions className="description">

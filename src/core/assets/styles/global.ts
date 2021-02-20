@@ -19,4 +19,18 @@ export const GlobalStyle = createGlobalStyle`
     font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
       monospace;
   }
+
+  .toasts-wrapper {
+    position: fixed;
+    top: 0;
+    left: 1rem;
+    z-index: 999
+  }
+
+  .toast {
+    padding: 0.5rem 1rem;
+    color: white;
+    background: green;
+    margin-bottom: 0.5rem;
+  }
 `

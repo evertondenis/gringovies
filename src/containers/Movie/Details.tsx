@@ -4,6 +4,8 @@ import { format } from 'date-fns'
 import { usePalette } from 'react-palette'
 import Casting from './Cast'
 
+import { Spinner, LazyImage } from 'components'
+
 const sanitizeDate = (value: string) => {
   return value.replaceAll('-', '/')
 }
@@ -73,9 +75,29 @@ const MovieDetails = ({ movieInfo, img }: any) => {
     }
   }
 
+  // <div
+  //   style={{
+  //     display: 'flex',
+  //     backgroundColor: `${data.vibrant}`,
+  //     opacity: 0.9,
+  //     width: '100%',
+  //     position: 'relative'
+  //   }}
+  // >
+  // <div
+  //   style={{
+  //     display: 'flex',
+  //     flexWrap: 'wrap',
+  //     alignItems: 'start',
+  //     alignContent: 'center',
+  //     boxSizing: 'border-box',
+  //     color: getContrastYIQ(data.vibrant),
+  //     flexDirection: 'column'
+  //   }}
+  // >
   return (
     <>
-      {loading && <p>LOADING...</p>}
+      {loading && <Spinner />}
       {movie && !loading && (
         <>
           {data && (
@@ -91,8 +113,7 @@ const MovieDetails = ({ movieInfo, img }: any) => {
               <div
                 style={{
                   display: 'flex',
-                  backgroundColor: `${data.vibrant}`,
-                  opacity: 0.9,
+                  backgroundColor: 'rgba(0,0,0,.74)',
                   width: '100%',
                   position: 'relative'
                 }}
@@ -103,11 +124,15 @@ const MovieDetails = ({ movieInfo, img }: any) => {
                     maxWidth: '300px'
                   }}
                 >
-                  <img
+                  <LazyImage
+                    src={`https://image.tmdb.org/t/p/w780/${movie.poster_path}`}
+                    alt={movie.title}
+                  />
+                  {/* <img
                     src={`https://image.tmdb.org/t/p/w780/${movie.poster_path}`}
                     alt={data.title}
                     style={{ width: '100%' }}
-                  />
+                  /> */}
                 </div>
                 <div
                   style={{
@@ -116,7 +141,7 @@ const MovieDetails = ({ movieInfo, img }: any) => {
                     alignItems: 'start',
                     alignContent: 'center',
                     boxSizing: 'border-box',
-                    color: getContrastYIQ(data.vibrant),
+                    color: '#fff',
                     flexDirection: 'column'
                   }}
                 >
@@ -143,7 +168,7 @@ const MovieDetails = ({ movieInfo, img }: any) => {
               </div>
             </div>
           )}
-          <Casting movieId={movie.id} />
+          {/* <Casting movieId={movie.id} /> */}
         </>
       )}
     </>

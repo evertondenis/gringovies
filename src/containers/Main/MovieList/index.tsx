@@ -4,11 +4,10 @@ import { fetcher } from 'core/hooks/useFetch'
 import { useLocalStorage } from 'core/hooks/useLocalStorage'
 import { PopularMovies, SearchMovies } from 'core/providers'
 
+import { Button, Spinner } from 'components'
+
 import MovieItem from './Item'
-interface FavoriteList {
-  id: number
-  image: string
-}
+
 interface IMovie {
   adult: boolean
   backdrop_path: string
@@ -31,32 +30,44 @@ interface IList {
 
 const MovieList = ({ match }: any) => {
   console.log('PARAMS: ', match.params)
-  const [storedFavorite, setFavorite] = useLocalStorage<Array<FavoriteList>>(
+  const currentPage = match.params.page
+  const [storedFavorite, setFavorite] = useLocalStorage<Array<IMovie>>(
     'favorites',
     []
   )
 
-  const [storedWatchList, setWatchList] = useLocalStorage<Array<FavoriteList>>(
+  const [storedWatchList, setWatchList] = useLocalStorage<Array<IMovie>>(
     'watchlist',
     []
   )
-
-  // SearchMovies(match.params.query, index + 1)
 
   const root: any = {
     search: SearchMovies,
     undefined: PopularMovies
   }
 
-  const { data, size, setSize } = useSWRInfinite(
-    (index) => root[match.params.page](index + 1, match.params.query),
+  const { data, size, error, setSize } = useSWRInfinite(
+    (index) => root[currentPage](index + 1, match.params.query),
     fetcher
   )
-  // const { data, size, setSize } = useSWRInfinite(
-  //   (index) => PopularMovies(index + 1),
-  //   fetcher
-  // )
-  const listOfMovies = data ? [].concat(...data) : []
+
+  const isLoadingInitialData = !data && !error
+
+  console.log(isLoadingInitialData)
+
+  const foo = (page: string) => {
+    console.log('data', data)
+    const defaultList = data ? [].concat(...data) : []
+    const map: { [key: string]: any } = {
+      favorites: [{ results: storedFavorite }],
+      watchlist: [{ results: storedWatchList }]
+    }
+    return map[page] || defaultList
+  }
+
+  const listOfMovies = foo(currentPage)
+
+  console.log('LIST: ', listOfMovies)
 
   const movieList = ({ results }: IList) => {
     return results?.map((item: IMovie) => (
@@ -65,14 +76,17 @@ const MovieList = ({ match }: any) => {
         {...item}
         favList={storedFavorite}
         watchList={storedWatchList}
-        updateFav={(list: Array<FavoriteList>) => setFavorite(list)}
-        updateWatch={(list: Array<FavoriteList>) => setWatchList(list)}
+        updateFav={(list: IMovie[]) => setFavorite(list)}
+        updateWatch={(list: IMovie[]) => setWatchList(list)}
       />
     ))
   }
 
   return (
     <section style={{ margin: '100px 4% 20px' }}>
+      {isLoadingInitialData &&
+        currentPage !== 'favorites' &&
+        currentPage !== 'watchlist' && <Spinner />}
       <div
         style={{
           display: 'flex',
@@ -81,7 +95,7 @@ const MovieList = ({ match }: any) => {
           justifyContent: 'space-around'
         }}
       >
-        {listOfMovies && listOfMovies.map((movies) => movieList(movies))}
+        {listOfMovies && listOfMovies.map((movies: any) => movieList(movies))}
       </div>
       <div
         style={{
@@ -91,19 +105,9 @@ const MovieList = ({ match }: any) => {
           alignItems: 'center'
         }}
       >
-        <button
-          style={{
-            width: '50%',
-            backgroundColor: '#222C30',
-            padding: '16px',
-            color: '#fff',
-            border: 'none',
-            cursor: 'pointer'
-          }}
-          onClick={() => setSize(size + 1)}
-        >
-          LOAD MORE
-        </button>
+        {currentPage !== 'favorites' && currentPage !== 'watchlist' && (
+          <Button onClick={() => setSize(size + 1)}>LOAD MORE</Button>
+        )}
       </div>
     </section>
   )

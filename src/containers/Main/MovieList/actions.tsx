@@ -8,12 +8,31 @@ interface List {
   image: string
 }
 
+// ('{ id: number; title: string; vote_average: number; release_date: string; poster_path: string; }')
+
+interface IMovie {
+  adult: boolean
+  backdrop_path: string
+  genre_ids: []
+  id: number
+  original_language: string
+  original_title: string
+  overview: string
+  popularity: number
+  poster_path: string
+  title: string
+  video: boolean
+  vote_average: number
+  vote_count: number
+  release_date: string
+}
+
 interface Props {
-  list: List
-  favList: Array<List>
-  watchList: Array<List>
-  updateFav: (arg: Array<List>) => void
-  updateWatch: (arg: Array<List>) => void
+  list: IMovie
+  favList: Array<IMovie>
+  watchList: Array<IMovie>
+  updateFav: (arg: Array<IMovie>) => void
+  updateWatch: (arg: Array<IMovie>) => void
 }
 
 const Actions = ({
@@ -23,32 +42,32 @@ const Actions = ({
   updateFav,
   updateWatch
 }: Props) => {
-  const addNewFav = ({ id, image }: List) => {
-    const isFav = !!favList.find((item: List) => item.id === id)
+  const addNewFav = (listFav: IMovie) => {
+    const isFav = !!favList.find((item: IMovie) => item.id === listFav.id)
 
     if (!isFav) {
-      updateFav([...favList, { id: id, image: image }])
+      updateFav([...favList, listFav])
     }
   }
-  const addNewWatch = ({ id, image }: List) => {
-    const isWatch = !!watchList.find((item: List) => item.id === id)
+  const addNewWatch = (listWatch: IMovie) => {
+    const isWatch = !!watchList.find((item: IMovie) => item.id === listWatch.id)
     if (!isWatch) {
-      updateWatch([...watchList, { id: id, image: image }])
+      updateWatch([...watchList, listWatch])
     }
   }
 
   const deleteFav = (id: number) => {
-    const newList = favList.filter((item: List) => item.id !== id)
+    const newList = favList.filter((item: IMovie) => item.id !== id)
     updateFav(newList)
   }
 
   const deleteWatch = (id: number) => {
-    const newList = watchList.filter((item: List) => item.id !== id)
+    const newList = watchList.filter((item: IMovie) => item.id !== id)
     updateWatch(newList)
   }
 
-  const isFav = !!favList.find((item: List) => item.id === list.id)
-  const isWatch = !!watchList.find((item: List) => item.id === list.id)
+  const isFav = !!favList.find((item: IMovie) => item.id === list.id)
+  const isWatch = !!watchList.find((item: IMovie) => item.id === list.id)
 
   return (
     <WrapperActions>

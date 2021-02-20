@@ -1,12 +1,11 @@
 import { useEffect, useState } from 'react'
 import { useFetch } from 'core/hooks/useFetch'
-
 import { getMovie } from 'core/providers'
+
+import { Spinner } from 'components'
 
 import Trailer from './Trailer'
 import Details from './Details'
-
-const path = 'https://api.themoviedb.org/3/'
 
 const Movie = ({ match }: any) => {
   const [movie, setMovie] = useState()
@@ -24,6 +23,7 @@ const Movie = ({ match }: any) => {
 
   return (
     <section style={{ margin: '80px 0 20px' }}>
+      {isLoading && <Spinner />}
       {movie && !isLoading && (
         <Details
           movieInfo={movie}

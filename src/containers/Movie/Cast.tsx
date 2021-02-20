@@ -1,6 +1,8 @@
 import { useEffect, useState } from 'react'
 import { useFetch } from 'core/hooks/useFetch'
 
+import { LazyImage } from 'components'
+
 const path = 'https://api.themoviedb.org/3/'
 
 const MovieCast = ({ movieId }: any) => {
@@ -38,11 +40,10 @@ const MovieCast = ({ movieId }: any) => {
           backgroundColor: '#fff'
         }}
       >
-        <div style={{ minWidth: '138px', width: '138px' }}>
-          <img
+        <div style={{ minWidth: '138px', width: '138px', height: '227px' }}>
+          <LazyImage
             src={`https://image.tmdb.org/t/p/w138_and_h175_face/${item.profile_path}`}
             alt={data.title}
-            style={{ width: '100%' }}
           />
           <p>{item.name}</p>
         </div>
