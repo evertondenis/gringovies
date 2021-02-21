@@ -12,12 +12,6 @@ const Modal = ({ show, onClose, children }: Props) => {
     return null
   }
 
-  // const closeOnEscape = (e: any) => {
-  //   if ((e.charCode || e.keyCode) === 27) {
-  //     onClose()
-  //   }
-  // }
-
   return (
     <Wrapper className={`${show ? 'show' : ''}`} onClick={onClose}>
       <Content onClick={(e) => e.stopPropagation()}>

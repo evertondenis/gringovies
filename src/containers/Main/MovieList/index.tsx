@@ -5,6 +5,8 @@ import { useLocalStorage } from 'core/hooks/useLocalStorage'
 import { PopularMovies, SearchMovies } from 'core/providers'
 
 import { Button, Spinner } from 'components'
+import { KeyboardBackspace as Back } from '@styled-icons/material/KeyboardBackspace'
+import { BackButton, ContainerListMovies, ContainerActions } from './styled'
 
 import MovieItem from './Item'
 
@@ -55,7 +57,6 @@ const MovieList = ({ match }: RouteComponentProps<TParams>) => {
   const isLoadingInitialData = !data && !error
 
   const foo = (page: string) => {
-    console.log('data', data)
     const defaultList = data ? [].concat(...data) : []
     const map: { [key: string]: any } = {
       favorites: [{ results: storedFavorite }],
@@ -79,33 +80,35 @@ const MovieList = ({ match }: RouteComponentProps<TParams>) => {
     ))
   }
 
+  const renderPageTitle = () => {
+    const defaultTitle = 'Popular Movies'
+    const map: { [key: string]: any } = {
+      favorites: 'My favorites movies',
+      watchlist: 'My watchlist of movies',
+      search: `Results for '${match.params.query}'`
+    }
+    return map[currentPage] || defaultTitle
+  }
+
   return (
     <section style={{ margin: '100px 4% 20px' }}>
+      {currentPage !== undefined && (
+        <BackButton to="/" title="Back">
+          <Back size={30} />
+        </BackButton>
+      )}
+      <h1>{renderPageTitle()}</h1>
       {isLoadingInitialData &&
         currentPage !== 'favorites' &&
         currentPage !== 'watchlist' && <Spinner />}
-      <div
-        style={{
-          display: 'flex',
-          width: '100%',
-          flexWrap: 'wrap',
-          justifyContent: 'space-around'
-        }}
-      >
+      <ContainerListMovies>
         {listOfMovies && listOfMovies.map((movies: IList) => movieList(movies))}
-      </div>
-      <div
-        style={{
-          display: 'flex',
-          height: '80px',
-          justifyContent: 'center',
-          alignItems: 'center'
-        }}
-      >
+      </ContainerListMovies>
+      <ContainerActions>
         {currentPage !== 'favorites' && currentPage !== 'watchlist' && (
           <Button onClick={() => setSize(size + 1)}>LOAD MORE</Button>
         )}
-      </div>
+      </ContainerActions>
     </section>
   )
 }

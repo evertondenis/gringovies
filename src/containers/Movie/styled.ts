@@ -1,4 +1,5 @@
 import styled from 'styled-components'
+import { Link } from 'react-router-dom'
 import { colors, metrics } from 'core/assets/styles'
 
 interface Props {
@@ -31,7 +32,7 @@ export const Title = styled.h1`
   color: ${colors.white};
 `
 
-export const SubTitle = styled.h1`
+export const SubTitle = styled.h2`
   font-size: ${metrics.fontSizeDefault};
   color: ${colors.white};
 `
@@ -163,4 +164,23 @@ export const SimilarMovie = styled.li`
   width: 180px;
   height: 270px;
   background-color: ${colors.white};
+`
+
+export const BackButton = styled(Link)`
+  border: 0;
+  background-color: transparent;
+  cursor: pointer;
+  z-index: 2;
+  align-self: flex-start;
+  margin-top: ${metrics.baseMarginSM};
+  margin-left: ${metrics.paddingPerc};
+
+  svg {
+    fill: ${colors.white};
+    transition: all 0.3s ease;
+
+    &:hover {
+      fill: ${colors.secondary};
+    }
+  }
 `

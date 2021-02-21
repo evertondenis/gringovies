@@ -3,7 +3,12 @@ import { getSimilar } from 'core/providers'
 import { Link } from 'react-router-dom'
 
 import { LazyImage } from 'components'
-import { ContentSimilar, SimilarMovie, WrapperSimilar } from './styled'
+import {
+  ContentSimilar,
+  SimilarMovie,
+  SubTitle,
+  WrapperSimilar
+} from './styled'
 
 const SimilarMovies = ({ id }: any) => {
   const { data, isLoading } = useFetch(getSimilar(id))
@@ -25,6 +30,7 @@ const SimilarMovies = ({ id }: any) => {
     <>
       {data && !isLoading && (
         <WrapperSimilar>
+          <SubTitle>You may also like</SubTitle>
           <ContentSimilar>{renderMovies(data.results)}</ContentSimilar>
         </WrapperSimilar>
       )}

@@ -4,7 +4,9 @@ import { useFetch } from 'core/hooks/useFetch'
 import { getMovie } from 'core/providers'
 
 import { Container, Spinner } from 'components'
+import { KeyboardBackspace as Back } from '@styled-icons/material/KeyboardBackspace'
 import Details from './Details'
+import { BackButton } from './styled'
 
 type TParams = { id: string }
 
@@ -12,14 +14,15 @@ const Movie = ({ match }: RouteComponentProps<TParams>) => {
   const [movie, setMovie] = useState()
   const { data, isLoading } = useFetch(getMovie(match.params.id))
 
-  console.log('movie: ', movie)
-
   useEffect(() => {
     setMovie(data)
   }, [data])
 
   return (
     <Container direction="column" margin="80px 0 0 0">
+      <BackButton to="/" title="Back">
+        <Back size={30} />
+      </BackButton>
       {isLoading && <Spinner />}
       {movie && !isLoading && (
         <Details

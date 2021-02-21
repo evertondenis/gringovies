@@ -27,8 +27,16 @@ export const LinkItem = styled(Link)`
   color: ${colors.white};
   text-decoration: none;
   font-size: ${metrics.fontSizeDefault};
+  transition: all 0.3s ease;
+
+  &:hover {
+    svg {
+      fill: ${colors.white};
+    }
+  }
 
   svg {
+    transition: all 0.3s ease;
     fill: ${colors.secondary};
   }
 

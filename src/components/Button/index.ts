@@ -9,6 +9,11 @@ const Button = styled.button`
   cursor: pointer;
   border-radius: ${metrics.baseRadius};
   font-size: ${metrics.fontSizeSM};
+  transition: all 0.3s ease;
+
+  &:hover {
+    background-color: ${colors.primary};
+  }
 
   ${({ disabled }) =>
     disabled &&

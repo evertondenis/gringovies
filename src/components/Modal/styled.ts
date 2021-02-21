@@ -45,5 +45,9 @@ export const CloseButton = styled.button`
 
   svg {
     fill: #fff;
+
+    &:hover {
+      fill: rgb(255, 66, 79);
+    }
   }
 `

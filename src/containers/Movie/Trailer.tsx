@@ -11,7 +11,6 @@ const MovieTrailer = ({ id }: any) => {
 
   const renderButton = () => {
     const trailer = data.results.find((item: any) => item.type === 'Trailer')
-    console.log(trailer)
     const disabled = !trailer || false
 
     return (
