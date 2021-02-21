@@ -1,5 +1,4 @@
 import { FC, InputHTMLAttributes, Ref } from 'react'
-import { Wrapper } from './styled'
 
 interface InputProps extends InputHTMLAttributes<HTMLInputElement> {
   name?: string

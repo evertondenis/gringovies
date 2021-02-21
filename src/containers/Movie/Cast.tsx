@@ -34,7 +34,6 @@ const MovieCast = ({ id }: any) => {
           </Casting>
           <Casting>
             <Trailer id={id} />
-            {/* <button>Trailler</button> */}
           </Casting>
         </>
       )}
