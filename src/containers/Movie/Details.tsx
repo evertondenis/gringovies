@@ -82,7 +82,7 @@ const MovieDetails = ({ movieInfo, img }: any) => {
   )
 
   const [movie, setMovie] = useState<Movie>()
-  const { data, loading, error } = usePalette(img)
+  const { data, loading } = usePalette(img)
 
   useEffect(() => {
     setMovie(movieInfo)

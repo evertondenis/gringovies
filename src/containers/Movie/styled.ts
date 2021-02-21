@@ -132,3 +132,35 @@ export const Casting = styled.div`
     }
   }
 `
+
+export const WrapperSimilar = styled.div`
+  position: relative;
+  top: 0;
+  left: 0;
+  margin: 30px 0 15px 4%;
+`
+
+export const ContentSimilar = styled.ol`
+  overflow-x: scroll;
+  overflow-y: hidden;
+  margin-left: -10px;
+  margin-top: -10px;
+  padding-bottom: 10px;
+  list-style-type: none;
+  list-style-position: inside;
+  display: flex;
+  position: relative;
+  top: 0;
+  left: 0;
+`
+
+export const SimilarMovie = styled.li`
+  margin: ${metrics.baseMarginSM};
+  margin-right: 4px;
+  border-radius: ${metrics.baseRadius};
+  overflow: hidden;
+  min-width: 180px;
+  width: 180px;
+  height: 270px;
+  background-color: ${colors.white};
+`
