@@ -1,4 +1,4 @@
-import { withRouter } from 'react-router-dom'
+import { withRouter, RouteComponentProps } from 'react-router-dom'
 import { useSWRInfinite } from 'swr'
 import { fetcher } from 'core/hooks/useFetch'
 import { useLocalStorage } from 'core/hooks/useLocalStorage'
@@ -28,8 +28,9 @@ interface IList {
   results: Array<IMovie>
 }
 
-const MovieList = ({ match }: any) => {
-  console.log('PARAMS: ', match.params)
+type TParams = { id: string; page: string; query?: string }
+
+const MovieList = ({ match }: RouteComponentProps<TParams>) => {
   const currentPage = match.params.page
   const [storedFavorite, setFavorite] = useLocalStorage<Array<IMovie>>(
     'favorites',
@@ -53,8 +54,6 @@ const MovieList = ({ match }: any) => {
 
   const isLoadingInitialData = !data && !error
 
-  console.log(isLoadingInitialData)
-
   const foo = (page: string) => {
     console.log('data', data)
     const defaultList = data ? [].concat(...data) : []
@@ -66,8 +65,6 @@ const MovieList = ({ match }: any) => {
   }
 
   const listOfMovies = foo(currentPage)
-
-  console.log('LIST: ', listOfMovies)
 
   const movieList = ({ results }: IList) => {
     return results?.map((item: IMovie) => (
@@ -95,7 +92,7 @@ const MovieList = ({ match }: any) => {
           justifyContent: 'space-around'
         }}
       >
-        {listOfMovies && listOfMovies.map((movies: any) => movieList(movies))}
+        {listOfMovies && listOfMovies.map((movies: IList) => movieList(movies))}
       </div>
       <div
         style={{

@@ -1,29 +1,30 @@
 import styled from 'styled-components'
+import { colors, metrics } from 'core/assets/styles'
 
 export const WrapperActions = styled.div`
   display: flex;
-  justify-content: flex-start
+  justify-content: flex-start;
   align-items: center;
 `
 
 export const Button = styled.a`
-  color: rgb(250, 250, 250);
+  color: ${colors.whiteMedium};
   text-decoration: none;
-  font-size: 12px;
+  font-size: ${metrics.fontSizeDefault};
 
   &:first-child {
-    padding-right: 10px;
+    padding-right: ${metrics.basePadding};
   }
 
   &.column {
     align-items: center;
-    color: #ff424f;
+    color: ${colors.secondary};
     display: flex;
     flex-direction: row;
 
     p {
       font-size: 12px;
-      color: #fff;
+      color: ${colors.white};
     }
   }
 `

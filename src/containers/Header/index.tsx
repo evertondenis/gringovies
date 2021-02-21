@@ -42,7 +42,7 @@ const Header = () => {
         </LinkItem>
         <LinkItem to="/watchlist" className="column">
           <Bookmark size="24" title="Watchist" />
-          <p>Watchlist</p>
+          <p>My List</p>
         </LinkItem>
       </Wrapper>
     </StyledHeader>

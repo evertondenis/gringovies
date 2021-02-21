@@ -3,13 +3,6 @@ import { Bookmark } from '@styled-icons/boxicons-solid/Bookmark'
 
 import { Button, WrapperActions } from './styled'
 
-interface List {
-  id: number
-  image: string
-}
-
-// ('{ id: number; title: string; vote_average: number; release_date: string; poster_path: string; }')
-
 interface IMovie {
   adult: boolean
   backdrop_path: string

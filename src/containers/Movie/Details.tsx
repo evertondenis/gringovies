@@ -1,8 +1,26 @@
 import { useEffect, useState } from 'react'
 import { format } from 'date-fns'
+import { useLocalStorage } from 'core/hooks/useLocalStorage'
 
 import { usePalette } from 'react-palette'
-import Casting from './Cast'
+import Actions from 'containers/Main/MovieList/actions'
+import Cast from './Cast'
+import SimilarMovies from './SimilarMovies'
+
+import {
+  Container,
+  Content,
+  Details,
+  Wrapper,
+  WrapperPoster,
+  Title,
+  Certification,
+  TagItem,
+  Tags,
+  Overview,
+  SubTitle,
+  Genres
+} from './styled'
 
 import { Spinner, LazyImage } from 'components'
 
@@ -10,7 +28,30 @@ const sanitizeDate = (value: string) => {
   return value.replaceAll('-', '/')
 }
 
-interface Movie {
+interface ReleaseDates {
+  release_dates: Array<Certification>
+}
+interface CertificationProps {
+  results: Array<ReleaseDates>
+}
+interface IMovie {
+  adult: boolean
+  backdrop_path: string
+  genre_ids: []
+  id: number
+  original_language: string
+  original_title: string
+  overview: string
+  popularity: number
+  poster_path: string
+  title: string
+  video: boolean
+  vote_average: number
+  vote_count: number
+  release_date: string
+}
+
+interface Movie extends IMovie {
   id: number
   poster_path: string
   title: string
@@ -22,21 +63,24 @@ interface Movie {
   release_dates: CertificationProps
   vote_average: number
 }
-
 interface Certification {
   certification: string
   note: string
   release_date: string
   type: number
 }
-interface ReleaseDates {
-  release_dates: Array<Certification>
-}
-interface CertificationProps {
-  results: Array<ReleaseDates>
-}
 
 const MovieDetails = ({ movieInfo, img }: any) => {
+  const [storedFavorite, setFavorite] = useLocalStorage<Array<IMovie>>(
+    'favorites',
+    []
+  )
+
+  const [storedWatchList, setWatchList] = useLocalStorage<Array<IMovie>>(
+    'watchlist',
+    []
+  )
+
   const [movie, setMovie] = useState<Movie>()
   const { data, loading, error } = usePalette(img)
 
@@ -52,7 +96,6 @@ const MovieDetails = ({ movieInfo, img }: any) => {
   }
 
   const getCertification = ({ results }: CertificationProps) => {
-    console.log('RESULTS: ', Object.keys(results[0])[0])
     const iso = Object.keys(results[0])[0]
     if (results) {
       const value = results.find((item: any) => item[iso] === 'US')
@@ -61,114 +104,60 @@ const MovieDetails = ({ movieInfo, img }: any) => {
     }
   }
 
-  function getContrastYIQ(hexcolor: any) {
-    console.log(hexcolor)
-    if (hexcolor) {
-      if (hexcolor.slice(0, 1) === '#') {
-        hexcolor = hexcolor.slice(1)
-        const r = parseInt(hexcolor.substr(0, 2), 16)
-        const g = parseInt(hexcolor.substr(2, 2), 16)
-        const b = parseInt(hexcolor.substr(4, 2), 16)
-        const yiq = (r * 299 + g * 587 + b * 114) / 1000
-        return yiq >= 128 ? 'black' : 'white'
-      }
-    }
-  }
-
-  // <div
-  //   style={{
-  //     display: 'flex',
-  //     backgroundColor: `${data.vibrant}`,
-  //     opacity: 0.9,
-  //     width: '100%',
-  //     position: 'relative'
-  //   }}
-  // >
-  // <div
-  //   style={{
-  //     display: 'flex',
-  //     flexWrap: 'wrap',
-  //     alignItems: 'start',
-  //     alignContent: 'center',
-  //     boxSizing: 'border-box',
-  //     color: getContrastYIQ(data.vibrant),
-  //     flexDirection: 'column'
-  //   }}
-  // >
   return (
     <>
       {loading && <Spinner />}
       {movie && !loading && (
         <>
           {data && (
-            <div
-              style={{
-                backgroundSize: 'cover',
-                backgroundRepeat: 'no-repeat',
-                backgroundImage: `url(${img})`,
-                width: '100%',
-                position: 'relative'
-              }}
-            >
-              <div
-                style={{
-                  display: 'flex',
-                  backgroundColor: 'rgba(0,0,0,.74)',
-                  width: '100%',
-                  position: 'relative'
-                }}
-              >
-                <div
-                  style={{
-                    minWidth: '300px',
-                    maxWidth: '300px'
-                  }}
-                >
+            <>
+              <Wrapper image={img}></Wrapper>
+              <Container>
+                <WrapperPoster>
                   <LazyImage
                     src={`https://image.tmdb.org/t/p/w780/${movie.poster_path}`}
                     alt={movie.title}
                   />
-                  {/* <img
-                    src={`https://image.tmdb.org/t/p/w780/${movie.poster_path}`}
-                    alt={data.title}
-                    style={{ width: '100%' }}
-                  /> */}
-                </div>
-                <div
-                  style={{
-                    display: 'flex',
-                    flexWrap: 'wrap',
-                    alignItems: 'start',
-                    alignContent: 'center',
-                    boxSizing: 'border-box',
-                    color: '#fff',
-                    flexDirection: 'column'
-                  }}
-                >
-                  <div>
-                    <p>{movie.title}</p>
-                  </div>
-                  {getCertification(movie.release_dates)}
-                  <div>
-                    <p>
+                </WrapperPoster>
+
+                <Content>
+                  <Title>{movie.title}</Title>
+                  <SubTitle>{movie.tagline}</SubTitle>
+                  <Tags>
+                    <TagItem>
+                      <Certification>
+                        <p>{getCertification(movie.release_dates)}</p>
+                      </Certification>
+                    </TagItem>
+                    <TagItem>
                       {format(
                         new Date(sanitizeDate(movie.release_date)),
-                        'MM/dd/yyyy'
+                        'yyyy'
                       )}
-                    </p>
-                    <p>{movie.vote_average * 10}%</p>
-                    <p>{getGenres(movie.genres)}</p>
-                  </div>
-                  <div>
-                    <p>{movie.tagline}</p>
-                    <p>Overview: {movie.overview}</p>
-                    <p>Status: {movie.status}</p>
-                  </div>
-                </div>
-              </div>
-            </div>
+                    </TagItem>
+                    <TagItem>{movie.vote_average * 10}%</TagItem>
+                    <TagItem>
+                      <Actions
+                        list={movie}
+                        favList={storedFavorite}
+                        watchList={storedWatchList}
+                        updateFav={setFavorite}
+                        updateWatch={setWatchList}
+                      />
+                    </TagItem>
+                  </Tags>
+                  <Genres>{getGenres(movie.genres)}</Genres>
+                  <Overview>
+                    <p>{movie.overview}</p>
+                  </Overview>
+                </Content>
+                <Details>
+                  <Cast id={movie.id} />
+                </Details>
+              </Container>
+              <SimilarMovies id={movie.id} />
+            </>
           )}
-          {/* <Casting movieId={movie.id} /> */}
         </>
       )}
     </>

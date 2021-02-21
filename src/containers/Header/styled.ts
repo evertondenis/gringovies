@@ -2,9 +2,11 @@ import styled from 'styled-components'
 import { Link } from 'react-router-dom'
 import { Input } from 'components'
 
+import { colors, metrics } from 'core/assets/styles'
+
 export const StyledHeader = styled.header`
   align-items: center;
-  background-color: rgba(0, 0, 0, 1);
+  background-color: ${colors.black};
   display: flex;
   height: 80px;
   position: fixed;
@@ -15,15 +17,20 @@ export const StyledHeader = styled.header`
 
 export const Wrapper = styled.div`
   align-items: center;
-  color: rgb(250, 250, 250);
+  color: ${colors.white};
   display: flex;
-  padding: 0 4%;
+  padding: 0 ${metrics.paddingPerc};
   width: 100%;
 `
 
 export const LinkItem = styled(Link)`
-  color: rgb(250, 250, 250);
+  color: ${colors.white};
   text-decoration: none;
+  font-size: ${metrics.fontSizeDefault};
+
+  svg {
+    fill: ${colors.secondary};
+  }
 
   &:last-child {
     padding-left: 10px;
@@ -31,13 +38,15 @@ export const LinkItem = styled(Link)`
 
   &.column {
     align-items: center;
-    color: #ff424f;
+    color: {
+      ${colors.secondary}
+    }
     display: flex;
     flex-direction: row;
 
     p {
       font-size: 12px;
-      color: #fff;
+      color: ${colors.white};
     }
   }
 `
@@ -55,9 +64,9 @@ export const WrapperSearch = styled.div`
 
 export const StyledInput = styled(Input)`
   background: none;
-  border: 1px solid #fff;
+  border: 1px solid ${colors.white};
   border-radius: 4px;
-  color: #fff;
+  color: ${colors.white};
   cursor: pointer;
   display: inline-block;
   outline: none;

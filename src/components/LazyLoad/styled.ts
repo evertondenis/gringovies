@@ -3,7 +3,7 @@ import styled, { keyframes } from 'styled-components'
 export const ImageWrapper = styled.div`
   position: relative;
   width: 100%;
-  height: 50vw;
+  height: 100%;
 `
 
 const loadingAnimation = keyframes`
