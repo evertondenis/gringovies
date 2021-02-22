@@ -19,7 +19,7 @@ You can see the demo [here](https://gringovies.herokuapp.com/)
 * Install the dependencies and start:
 ```sh
 $ yarn
-$ yarn dev
+$ yarn start
 ```
 The project run on ```http://localhost:3000/```
 ### Stack
