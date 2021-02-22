@@ -15,7 +15,10 @@ You can see the demo [here](https://gringovies.herokuapp.com/)
 
 ## Start and run locally
 
+### Is necessary create a account in [TMDB](https://www.themoviedb.org/documentation/api) and register an [API key](https://developers.themoviedb.org/3/getting-started/introduction).
+
 * Clone this repository
+* Change the credentials in ``.example.env`` and rename file for ``.env``
 * Install the dependencies and start:
 ```sh
 $ yarn
