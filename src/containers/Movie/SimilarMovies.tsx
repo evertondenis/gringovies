@@ -2,7 +2,7 @@ import { useFetch } from 'core/hooks/useFetch'
 import { getSimilar } from 'core/providers'
 import { Link } from 'react-router-dom'
 
-import { LazyImage } from 'components/index'
+import { LazyImage } from 'components'
 import {
   ContentSimilar,
   SimilarMovie,

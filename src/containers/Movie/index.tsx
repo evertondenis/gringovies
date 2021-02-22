@@ -3,7 +3,7 @@ import { RouteComponentProps } from 'react-router-dom'
 import { useFetch } from 'core/hooks/useFetch'
 import { getMovie } from 'core/providers'
 
-import { Container, Spinner } from 'components/index'
+import { Container, Spinner } from 'components'
 import { KeyboardBackspace as Back } from '@styled-icons/material/KeyboardBackspace'
 import Details from './Details'
 import { BackButton } from './styled'
