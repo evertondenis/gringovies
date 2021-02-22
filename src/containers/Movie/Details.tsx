@@ -22,7 +22,7 @@ import {
   Genres
 } from './styled'
 
-import { Spinner, LazyImage } from 'components'
+import { Spinner, LazyImage } from 'components/index'
 
 const sanitizeDate = (value: string) => {
   return value.replaceAll('-', '/')

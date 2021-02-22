@@ -1,7 +1,7 @@
 import React, { FC } from 'react'
 import { Link } from 'react-router-dom'
 
-import { LazyImage } from 'components'
+import { LazyImage } from 'components/index'
 
 import {
   Average,

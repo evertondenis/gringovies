@@ -4,7 +4,7 @@ import { fetcher } from 'core/hooks/useFetch'
 import { useLocalStorage } from 'core/hooks/useLocalStorage'
 import { PopularMovies, SearchMovies } from 'core/providers'
 
-import { Button, Spinner } from 'components'
+import { Button, Spinner } from 'components/index'
 import { KeyboardBackspace as Back } from '@styled-icons/material/KeyboardBackspace'
 import { BackButton, ContainerListMovies, ContainerActions } from './styled'
 

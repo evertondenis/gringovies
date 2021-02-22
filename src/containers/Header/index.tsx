@@ -29,7 +29,7 @@ const Header = () => {
         <LinkItem to="/">GringoVies</LinkItem>
         <WrapperSearch>
           <StyledInput
-            onFocus={(e) => (e.target.value = '')}
+            onFocus={(e: any) => (e.target.value = '')}
             setRef={inputSearch}
             onKeyDown={handleKeyDown}
             placeholder="Search movies"

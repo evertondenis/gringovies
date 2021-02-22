@@ -3,7 +3,7 @@ import { useFetch } from 'core/hooks/useFetch'
 import ReactPlayer from 'react-player/youtube'
 import { getTrailer } from 'core/providers'
 
-import { Button, Modal } from 'components'
+import { Button, Modal } from 'components/index'
 
 const MovieTrailer = ({ id }: any) => {
   const { data, isLoading } = useFetch(getTrailer(id))

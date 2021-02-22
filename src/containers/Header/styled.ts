@@ -1,6 +1,6 @@
 import styled from 'styled-components'
 import { Link } from 'react-router-dom'
-import { Input } from 'components'
+import { Input } from 'components/index'
 
 import { colors, metrics } from 'core/assets/styles'
 
