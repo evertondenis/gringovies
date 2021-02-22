@@ -25,7 +25,7 @@ The project run on ```http://localhost:3000/```
 ### Stack
 * [TMDB API](https://www.themoviedb.org/documentation/api)
 * [Create-react-app](https://github.com/facebook/create-react-app)
-* [React](https://pt-br.reactjs.org/)
+* [React with TypeScript](https://www.typescriptlang.org/docs/handbook/react.html)
 * [Styled Components](https://www.styled-components.com/)
 * [Testing Library](https://testing-library.com/)
 
