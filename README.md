@@ -16,7 +16,7 @@ You can see the demo [here](https://gringovies.herokuapp.com/)
 ## Start and run locally
 
 * Clone this repository
-* These commands install the dependencies and start.
+* Install the dependencies and start:
 ```sh
 $ yarn
 $ yarn dev
