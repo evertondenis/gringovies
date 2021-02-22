@@ -8,11 +8,12 @@ const getStyles = ({
   flex = '0 1 auto',
   height = '100%',
   justify = 'flex-start',
-  minHeight = '1px',
+  minHeight = '100%',
   overflow = 'visible',
   padding = '0',
   width = 'auto',
-  margin = '0'
+  margin = '0',
+  position = 'relative'
 }) => css`
   align-items: ${alignItems};
   background: ${colors.white};
@@ -24,7 +25,7 @@ const getStyles = ({
   min-height: ${minHeight};
   overflow: ${overflow};
   padding: ${padding};
-  position: relative;
+  position: ${position};
   width: ${width};
 `
 

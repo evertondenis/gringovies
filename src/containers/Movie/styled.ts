@@ -7,15 +7,12 @@ interface Props {
 }
 
 export const Container = styled.div`
-  /* display: grid; */
   display: flex;
   flex-direction: column;
   width: 100%;
   margin: 0 auto;
   position: relative;
   padding: ${metrics.basePadding} ${metrics.paddingPerc};
-  /* grid-template-columns: 250px auto 300px; */
-  /* grid-template-columns: repeat(auto-fill, minmax(250px, 1fr)); */
   column-gap: ${metrics.baseMarginSM};
 
   display: flex;

@@ -18,7 +18,8 @@ export const GlobalStyle = createGlobalStyle`
     font-style: normal;
     -webkit-font-smoothing: antialiased;
     -moz-osx-font-smoothing: grayscale;
-    height: 100%
+    height: 100%;
+    min-height: 100%;
   }
 
   h1, h2 {

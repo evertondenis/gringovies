@@ -28,7 +28,7 @@ const SimilarMovies = ({ id }: any) => {
 
   return (
     <>
-      {data && !isLoading && (
+      {data && data?.results.length > 0 && !isLoading && (
         <WrapperSimilar>
           <SubTitle>You may also like</SubTitle>
           <ContentSimilar>{renderMovies(data.results)}</ContentSimilar>
