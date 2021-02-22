@@ -1,4 +1,4 @@
-import { withRouter, RouteComponentProps } from 'react-router-dom'
+import { useParams } from 'react-router-dom'
 import { useSWRInfinite } from 'swr'
 import { fetcher } from 'core/hooks/useFetch'
 import { useLocalStorage } from 'core/hooks/useLocalStorage'
@@ -32,8 +32,10 @@ interface IList {
 
 type TParams = { id: string; page: string; query?: string }
 
-const MovieList = ({ match }: RouteComponentProps<TParams>) => {
-  const currentPage = match.params.page
+const MovieList = () => {
+  const { page, query } = useParams<TParams>()
+
+  const currentPage = page
   const [storedFavorite, setFavorite] = useLocalStorage<Array<IMovie>>(
     'favorites',
     []
@@ -50,7 +52,7 @@ const MovieList = ({ match }: RouteComponentProps<TParams>) => {
   }
 
   const { data, size, error, setSize } = useSWRInfinite(
-    (index) => root[currentPage](index + 1, match.params.query),
+    (index) => root[currentPage](index + 1, query),
     fetcher
   )
 
@@ -85,7 +87,7 @@ const MovieList = ({ match }: RouteComponentProps<TParams>) => {
     const map: { [key: string]: any } = {
       favorites: 'My favorites movies',
       watchlist: 'My watchlist of movies',
-      search: `Results for '${match.params.query}'`
+      search: `Results for '${query}'`
     }
     return map[currentPage] || defaultTitle
   }
@@ -113,4 +115,4 @@ const MovieList = ({ match }: RouteComponentProps<TParams>) => {
   )
 }
 
-export default withRouter(MovieList)
+export default MovieList
