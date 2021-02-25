@@ -185,7 +185,7 @@ export const BackButton = styled(Link)`
   border: 0;
   background-color: transparent;
   cursor: pointer;
-  z-index: 2;
+  z-index: 1;
   align-self: flex-start;
   margin-top: ${metrics.baseMarginSM};
   margin-left: ${metrics.paddingPerc};
