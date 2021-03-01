@@ -26,7 +26,7 @@ const Header = () => {
   return (
     <StyledHeader>
       <Wrapper>
-        <LinkItem to="/">GringoVies</LinkItem>
+        <LinkItem to="/gringovies">GringoVies</LinkItem>
         <WrapperSearch>
           <StyledInput
             onFocus={(e: any) => (e.target.value = '')}

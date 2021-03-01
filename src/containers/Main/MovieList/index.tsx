@@ -99,7 +99,7 @@ const MovieList = () => {
   return (
     <section style={{ margin: '100px 4% 20px' }}>
       {currentPage !== undefined && (
-        <BackButton to="/" title="Back">
+        <BackButton to="/gringovies" title="Back">
           <Back size={30} />
         </BackButton>
       )}

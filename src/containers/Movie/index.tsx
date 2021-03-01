@@ -20,7 +20,7 @@ const Movie = ({ match }: RouteComponentProps<TParams>) => {
 
   return (
     <Container direction="column" margin="80px 0 0 0">
-      <BackButton to="/" title="Back">
+      <BackButton to="/gringovies" title="Back">
         <Back size={30} />
       </BackButton>
       {isLoading && <Spinner />}
