@@ -20,6 +20,9 @@ const Button = styled.button`
     css`
       background-color: #b2b2b2;
       cursor: initial;
+      &:hover {
+        background-color: #b2b2b2;
+      }
     `};
 `
 
