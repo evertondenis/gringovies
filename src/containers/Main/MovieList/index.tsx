@@ -94,6 +94,8 @@ const MovieList = () => {
     return map[currentPage] || defaultTitle
   }
 
+  const conditional = currentPage !== 'favorites' && currentPage !== 'watchlist'
+
   return (
     <section style={{ margin: '100px 4% 20px' }}>
       {currentPage !== undefined && (
@@ -109,7 +111,7 @@ const MovieList = () => {
         {listOfMovies && listOfMovies.map((movies: IList) => movieList(movies))}
       </ContainerListMovies>
       <ContainerActions>
-        {currentPage !== 'favorites' && currentPage !== 'watchlist' && (
+        {conditional && (
           <Button onClick={() => setSize(size + 1)}>LOAD MORE</Button>
         )}
       </ContainerActions>
