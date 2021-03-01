@@ -17,7 +17,7 @@ const SimilarMovies = ({ id }: any) => {
   const renderMovies = (results: any) => {
     return results.map((item: any) => (
       <SimilarMovie key={item.id}>
-        <Link to={`/movie/${item.id}`}>
+        <Link to={`/gringovies/movie/${item.id}`}>
           <LazyImage
             src={
               item.poster_path
