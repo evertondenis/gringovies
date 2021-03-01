@@ -19,7 +19,7 @@ const Header = () => {
 
   const handleKeyDown = (event: React.KeyboardEvent) => {
     if (event.key === 'Enter') {
-      history.push(`/search/${inputSearch.current?.value}`)
+      history.push(`/gringovies/search/${inputSearch.current?.value}`)
     }
   }
 
