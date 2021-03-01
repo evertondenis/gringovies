@@ -6,6 +6,7 @@ import { usePalette } from 'react-palette'
 import Actions from 'containers/Main/MovieList/actions'
 import Cast from './Cast'
 import SimilarMovies from './SimilarMovies'
+import ImgNotFound from 'core/assets/images/images.jpeg'
 
 import {
   Container,
@@ -115,7 +116,11 @@ const MovieDetails = ({ movieInfo, img }: any) => {
               <Container>
                 <WrapperPoster>
                   <LazyImage
-                    src={`https://image.tmdb.org/t/p/w780/${movie.poster_path}`}
+                    src={
+                      movie.poster_path
+                        ? `https://image.tmdb.org/t/p/w780/${movie.poster_path}`
+                        : ImgNotFound
+                    }
                     alt={movie.title}
                   />
                 </WrapperPoster>
