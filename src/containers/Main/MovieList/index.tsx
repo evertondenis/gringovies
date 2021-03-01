@@ -58,7 +58,7 @@ const MovieList = () => {
 
   const isLoadingInitialData = !data && !error
 
-  const foo = (page: string) => {
+  const updateListOfMovies = (page: string) => {
     const defaultList = data ? [].concat(...data) : []
     const map: { [key: string]: any } = {
       favorites: [{ results: storedFavorite }],
@@ -67,10 +67,12 @@ const MovieList = () => {
     return map[page] || defaultList
   }
 
-  const listOfMovies = foo(currentPage)
+  const listOfMovies = updateListOfMovies(currentPage)
 
   const movieList = ({ results }: IList) => {
-    return results?.map((item: IMovie) => (
+    if (results.length === 0) return <h2 key="list">No movies to list!!</h2>
+
+    return results.map((item: IMovie) => (
       <MovieItem
         key={item.id}
         {...item}
