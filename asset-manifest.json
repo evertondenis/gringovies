@@ -1,0 +1,19 @@
+{
+  "files": {
+    "main.js": "/gringovies/static/js/main.7304a36b.chunk.js",
+    "main.js.map": "/gringovies/static/js/main.7304a36b.chunk.js.map",
+    "runtime-main.js": "/gringovies/static/js/runtime-main.e4cb5cd2.js",
+    "runtime-main.js.map": "/gringovies/static/js/runtime-main.e4cb5cd2.js.map",
+    "static/js/2.3a1559cb.chunk.js": "/gringovies/static/js/2.3a1559cb.chunk.js",
+    "static/js/2.3a1559cb.chunk.js.map": "/gringovies/static/js/2.3a1559cb.chunk.js.map",
+    "static/js/3.be049c4b.chunk.js": "/gringovies/static/js/3.be049c4b.chunk.js",
+    "static/js/3.be049c4b.chunk.js.map": "/gringovies/static/js/3.be049c4b.chunk.js.map",
+    "index.html": "/gringovies/index.html",
+    "static/js/2.3a1559cb.chunk.js.LICENSE.txt": "/gringovies/static/js/2.3a1559cb.chunk.js.LICENSE.txt"
+  },
+  "entrypoints": [
+    "static/js/runtime-main.e4cb5cd2.js",
+    "static/js/2.3a1559cb.chunk.js",
+    "static/js/main.7304a36b.chunk.js"
+  ]
+}
