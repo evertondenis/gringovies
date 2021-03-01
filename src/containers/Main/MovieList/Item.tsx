@@ -47,7 +47,7 @@ const MovieItem = ({
           ? `https://image.tmdb.org/t/p/w500/${rest.poster_path}`
           : ImgNotFound
       }
-      link={`/movie/${rest.id}`}
+      link={`/gringovies/movie/${rest.id}`}
       title={rest.title}
       average={`${rest.vote_average * 10}%`}
     >

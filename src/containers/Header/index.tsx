@@ -36,11 +36,11 @@ const Header = () => {
           />
           <Search size="28" title="Search movies" />
         </WrapperSearch>
-        <LinkItem to="/favorites" className="column">
+        <LinkItem to="/gringovies/favorites" className="column">
           <BookmarkHeart size="24" title="Favorites" />
           <p>Favorites</p>
         </LinkItem>
-        <LinkItem to="/watchlist" className="column">
+        <LinkItem to="/gringovies/watchlist" className="column">
           <Bookmark size="24" title="Watchist" />
           <p>My List</p>
         </LinkItem>

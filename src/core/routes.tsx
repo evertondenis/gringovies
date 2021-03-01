@@ -9,7 +9,7 @@ export const Routes = () => {
     <>
       <Header />
       <Switch>
-        <Route path="/movie/:id" exact component={Movie} />
+        <Route path="/gringovies/movie/:id" exact component={Movie} />
         <Route path="/gringovies/:page?/:query?" exact component={Home} />
       </Switch>
     </>
