@@ -4,7 +4,8 @@
 App that lists the most popular movies, base on the [TMDB](https://www.themoviedb.org/documentation/api).
 
 ## Demo
-You can see the demo [here](https://gringovies.herokuapp.com/)
+[You can see the demo here](https://evertondenis.github.io/gringovies/)
+<!-- [You can see the demo here](https://gringovies.herokuapp.com/) -->
 
 ## Features
 * List of Popular Movies
