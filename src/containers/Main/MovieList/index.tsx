@@ -1,10 +1,10 @@
-import { withRouter, RouteComponentProps } from 'react-router-dom'
+import { useParams } from 'react-router-dom'
 import { useSWRInfinite } from 'swr'
 import { fetcher } from 'core/hooks/useFetch'
 import { useLocalStorage } from 'core/hooks/useLocalStorage'
 import { PopularMovies, SearchMovies } from 'core/providers'
 
-import { Button, Spinner } from 'components/index'
+import { Button, Spinner } from 'components'
 import { KeyboardBackspace as Back } from '@styled-icons/material/KeyboardBackspace'
 import { BackButton, ContainerListMovies, ContainerActions } from './styled'
 
@@ -32,8 +32,10 @@ interface IList {
 
 type TParams = { id: string; page: string; query?: string }
 
-const MovieList = ({ match }: RouteComponentProps<TParams>) => {
-  const currentPage = match.params.page
+const MovieList = () => {
+  const { page, query } = useParams<TParams>()
+
+  const currentPage = page
   const [storedFavorite, setFavorite] = useLocalStorage<Array<IMovie>>(
     'favorites',
     []
@@ -50,13 +52,13 @@ const MovieList = ({ match }: RouteComponentProps<TParams>) => {
   }
 
   const { data, size, error, setSize } = useSWRInfinite(
-    (index) => root[currentPage](index + 1, match.params.query),
+    (index) => root[currentPage](index + 1, query),
     fetcher
   )
 
   const isLoadingInitialData = !data && !error
 
-  const foo = (page: string) => {
+  const updateListOfMovies = (page: string) => {
     const defaultList = data ? [].concat(...data) : []
     const map: { [key: string]: any } = {
       favorites: [{ results: storedFavorite }],
@@ -65,10 +67,12 @@ const MovieList = ({ match }: RouteComponentProps<TParams>) => {
     return map[page] || defaultList
   }
 
-  const listOfMovies = foo(currentPage)
+  const listOfMovies = updateListOfMovies(currentPage)
 
   const movieList = ({ results }: IList) => {
-    return results?.map((item: IMovie) => (
+    if (results.length === 0) return <h2 key="list">No movies to list!!</h2>
+
+    return results.map((item: IMovie) => (
       <MovieItem
         key={item.id}
         {...item}
@@ -85,15 +89,17 @@ const MovieList = ({ match }: RouteComponentProps<TParams>) => {
     const map: { [key: string]: any } = {
       favorites: 'My favorites movies',
       watchlist: 'My watchlist of movies',
-      search: `Results for '${match.params.query}'`
+      search: `Results for '${query}'`
     }
     return map[currentPage] || defaultTitle
   }
 
+  const conditional = currentPage !== 'favorites' && currentPage !== 'watchlist'
+
   return (
     <section style={{ margin: '100px 4% 20px' }}>
       {currentPage !== undefined && (
-        <BackButton to="/" title="Back">
+        <BackButton to="/gringovies" title="Back">
           <Back size={30} />
         </BackButton>
       )}
@@ -105,7 +111,7 @@ const MovieList = ({ match }: RouteComponentProps<TParams>) => {
         {listOfMovies && listOfMovies.map((movies: IList) => movieList(movies))}
       </ContainerListMovies>
       <ContainerActions>
-        {currentPage !== 'favorites' && currentPage !== 'watchlist' && (
+        {conditional && (
           <Button onClick={() => setSize(size + 1)}>LOAD MORE</Button>
         )}
       </ContainerActions>
@@ -113,4 +119,4 @@ const MovieList = ({ match }: RouteComponentProps<TParams>) => {
   )
 }
 
-export default withRouter(MovieList)
+export default MovieList

@@ -2,7 +2,8 @@ import { useFetch } from 'core/hooks/useFetch'
 import { getSimilar } from 'core/providers'
 import { Link } from 'react-router-dom'
 
-import { LazyImage } from 'components/index'
+import { LazyImage } from 'components'
+import ImgNotFound from 'core/assets/images/images.jpeg'
 import {
   ContentSimilar,
   SimilarMovie,
@@ -16,9 +17,13 @@ const SimilarMovies = ({ id }: any) => {
   const renderMovies = (results: any) => {
     return results.map((item: any) => (
       <SimilarMovie key={item.id}>
-        <Link to={`/movie/${item.id}`}>
+        <Link to={`/gringovies/movie/${item.id}`}>
           <LazyImage
-            src={`https://image.tmdb.org/t/p/w500/${item.poster_path}`}
+            src={
+              item.poster_path
+                ? `https://image.tmdb.org/t/p/w500/${item.poster_path}`
+                : ImgNotFound
+            }
             alt={item.title}
           />
         </Link>

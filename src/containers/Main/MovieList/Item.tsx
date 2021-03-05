@@ -1,6 +1,8 @@
 import Card from '../components/Card'
 import Actions from './actions'
 
+import ImgNotFound from 'core/assets/images/images.jpeg'
+
 interface IMovie {
   adult: boolean
   backdrop_path: string
@@ -40,8 +42,12 @@ const MovieItem = ({
   return (
     <Card
       key={rest.id}
-      img={`https://image.tmdb.org/t/p/w500/${rest.poster_path}`}
-      link={`/movie/${rest.id}`}
+      img={
+        rest.poster_path
+          ? `https://image.tmdb.org/t/p/w500/${rest.poster_path}`
+          : ImgNotFound
+      }
+      link={`/gringovies/movie/${rest.id}`}
       title={rest.title}
       average={`${rest.vote_average * 10}%`}
     >

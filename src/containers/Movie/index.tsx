@@ -3,7 +3,7 @@ import { RouteComponentProps } from 'react-router-dom'
 import { useFetch } from 'core/hooks/useFetch'
 import { getMovie } from 'core/providers'
 
-import { Container, Spinner } from 'components/index'
+import { Container, Spinner } from 'components'
 import { KeyboardBackspace as Back } from '@styled-icons/material/KeyboardBackspace'
 import Details from './Details'
 import { BackButton } from './styled'
@@ -20,7 +20,7 @@ const Movie = ({ match }: RouteComponentProps<TParams>) => {
 
   return (
     <Container direction="column" margin="80px 0 0 0">
-      <BackButton to="/" title="Back">
+      <BackButton to="/gringovies" title="Back">
         <Back size={30} />
       </BackButton>
       {isLoading && <Spinner />}
