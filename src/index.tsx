@@ -11,6 +11,7 @@ ReactDOM.render(
   <React.StrictMode>
     <BrowserRouter>
       <GlobalStyle />
+
       <Routes />
     </BrowserRouter>
   </React.StrictMode>,
