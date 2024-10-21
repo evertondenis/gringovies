@@ -1,6 +1,11 @@
 import { useState } from 'react'
 import { useFetch } from 'core/hooks/useFetch'
-import ReactPlayer from 'react-player/youtube'
+
+import { default as _ReactPlayer } from 'react-player'
+import { ReactPlayerProps } from 'react-player/types/lib'
+const ReactPlayer = _ReactPlayer as unknown as React.FC<ReactPlayerProps>
+
+// import ReactPlayer from 'react-player/youtube'
 import { getTrailer } from 'core/providers'
 
 import { Button, Modal } from 'components'
